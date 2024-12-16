@@ -1,5 +1,7 @@
 # MMIO2Verilog
-Python script for converting mmiotrace logs (/sys/kernel/debug/tracing/trace_marker) to a functional BAR controller to handle driver <-> firmware communication for PCILeech.
+Python script for converting mmiotrace logs (/sys/kernel/debug/tracing/trace_marker) to a functional BAR controller to handle driver <-> firmware communication for the PCILeech FPGA base.
+
+⚠️ The predefined values within the `drd_req_valid` case are specific to my donor card, using this tool in its current state will most likely cause a kernel panic or drvscan fail to some degree. I'll work on modifying this script at some point to process memory dumps from RWEverything.
 
 Currently only handles read operations (rd_rsp_data)
 
