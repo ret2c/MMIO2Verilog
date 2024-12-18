@@ -7,11 +7,13 @@ Currently only handles read operations (rd_rsp_data) and only supports a single 
 
 Sample input:
 ```
-R 4 2456.033280 2 0xf7801000 0x53920223 0x0 0
-R 4 2456.033290 2 0xf7800580 0x81f0883f 0x0 0
-R 4 2456.033292 2 0xf7800580 0x81f0883f 0x0 0
-W 4 2456.033294 2 0xf7800580 0xc000883f 0x0 0
-R 4 2456.033296 2 0xf7800580 0xc000883f 0x0 0
+R 4 2456.105919 2 0xf780010c 0x4c02 0x0 0
+R 4 2456.130642 2 0xf7800114 0x1 0x0 0
+R 4 2456.132390 2 0xf7800200 0x0 0x0 0
+R 4 2456.137697 2 0xf7800204 0x7804 0x0 0
+...
+R 4 2550.265744 2 0xf7807010 0xff001f 0x0 0
+R 4 2456.132385 2 0xf7807014 0xffffff03 0x0 0
 ```
 
 Sample output:
@@ -22,10 +24,6 @@ if (drd_req_valid) begin
         16'h0114 : rd_rsp_data <= 32'h00000001;
         16'h0200 : rd_rsp_data <= 32'h00000000;
         16'h0204 : rd_rsp_data <= 32'h00007800;
-        16'h0208 : rd_rsp_data <= 32'h00000065;
-        16'h020C : rd_rsp_data <= 32'h00000000;
-        16'h0214 : rd_rsp_data <= 32'h00002222;
-        16'h1718 : rd_rsp_data <= 32'h000000B8;
         ...
         16'h7010 : rd_rsp_data <= 32'h00FF001F;
         16'h7014 : rd_rsp_data <= 32'hFFFFFF03;
