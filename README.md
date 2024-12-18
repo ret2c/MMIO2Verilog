@@ -1,7 +1,7 @@
 # MMIO2Verilog
 Python script for converting mmiotrace logs (/sys/kernel/debug/tracing/trace_marker) to a functional BAR controller to handle driver <-> firmware communication for the PCILeech FPGA base.
 
-⚠️ Using this tool in its current state will most likely cause a kernel panic or drvscan fail to some degree.
+⚠️ This tool is essentially generates a static BAR dump that doesn't implement any sort of dynamic logic that would give consideration to timing events, writes, etc. In its current state, it would most likely cause a drvscan fail and trigger a warning within Device Manager.
 
 Currently only handles read operations (rd_rsp_data) and only supports a single BAR.
 
