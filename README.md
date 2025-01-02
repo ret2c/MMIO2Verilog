@@ -3,11 +3,11 @@ Python script for converting mmiotrace logs (/sys/kernel/debug/tracing/trace_mar
 
 Ensure your MMIOTrace is verbose enough, use the device as intended while debugging to produce the most results.
 
-⚠️ This tool generates a static BAR dump for reads, and attempts to identify dynamic relationship(s) between reads & writes. In its current state, it would most likely cause a drvscan fail and trigger a warning within Device Manager. Please review the output and make changes based on your own testing.
+⚠️ This tool generates a static BAR dump for reads, and attempts to identify dynamic relationship(s) between reads & writes. Your device will not be able to breathe using only this tool, its intention is to give you a starting point.
 
 ### Constraints
 - Only supports a single BAR
-- No MAC randomization support
+- No MAC randomization support (if your donor card functions as a NIC)
 - Identified relationships between memory addresses may be invalid
 
 Sample MMIO input:
@@ -35,4 +35,20 @@ if (drd_req_valid) begin
         default: rd_rsp_data <= 32'h00000000;
     endcase
 end
+```
+
+drvscan output:
+```diff
+
+*\drvscan\*>Client.exe --scanpci --advanced
+[drvscan] scanning PCIe devices
+[PciExpressRootPort] [00:28:02] [8086:8C14] (OK) [\Driver\pci]
+        [PciExpressEndpoint] [03:00:00] [10EC:8168] [\Driver\rt640x64]
+
+! [PciExpressRootPort] [00:28:05] [8086:8C1A] (card is not breathing) [\Driver\pci]
+!        [PciExpressEndpoint] [04:00:00] [1814:5392] [\Driver\vwifibus]
+
+! [PciExpressRootPort] [00:28:00] [8086:8C10] (bus master off) [\Driver\pci]
+
++ [drvscan] scan is complete [187ms]
 ```
