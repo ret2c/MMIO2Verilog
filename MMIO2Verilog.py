@@ -1,8 +1,15 @@
-import re
+import re, os, sys
 from collections import defaultdict
 import struct
 
 def process_combined_sources(memory_dump_path, mmio_trace_path):
+    if not os.path.isfile():
+        print(f"BAR dump file not found: {memory_dump_path}")
+        sys.exit(1)
+    if not os.path.isfile():
+        print(f"MMIOTrace file not found: {mmio_trace_path}")
+        sys.exit(1)
+    
     static_values = {}
     with open(memory_dump_path, 'rb') as f:
         data = f.read()
