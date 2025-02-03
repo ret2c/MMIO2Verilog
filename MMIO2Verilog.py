@@ -30,7 +30,11 @@ def process_combined_sources(memory_dump_path, mmio_trace_path):
                 op_type = match.group(1)
                 address = int(match.group(3), 16)
                 data = int(match.group(4), 16)
-                offset = address - 0x00000000  # Adjust BAR based on your donor card
+                ##########
+                # Replace "0x00000000" with your actual BAR address
+                offset = address - 0x00000000
+                # Replace "0x00000000" with your actual BAR address
+                ##########
                 
                 if op_type == 'R':
                     read_patterns[offset].append(data)
@@ -120,7 +124,7 @@ endmodule""")
     return "\n".join(sv_code)
 
 if __name__ == "__main__":
-    print("BAR Controller Generator - Combined Functionality")
+    print("MMIO2Verilog Script - Combine RWE & MMIOTrace dump\nChange your BAR on Line 35")
     memory_dump_file = input("Enter filename of memory dump (.bin): ")
     mmio_trace_file = input("Enter filename of MMIO Trace log: ")
     
