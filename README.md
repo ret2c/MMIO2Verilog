@@ -1,12 +1,13 @@
 # MMIO2Verilog
 Python script for converting mmiotrace logs (/sys/kernel/debug/tracing/trace_marker) to a functional BAR controller to handle driver <-> firmware communication for the PCILeech FPGA base. Part of this script borrows functionality from [zelz69's Bar2Verilog](https://github.com/zelz69/Bar2Verilog) repository.
 
-Ensure your MMIOTrace is verbose enough, use the device as intended while debugging to produce the most results.
+Ensure your MMIOTrace is verbose enough, use the device as intended while debugging to produce the most results. Use information from your open-source Linux driver to help make sense of relationships developed during debugging.
 
 ⚠️ This tool generates a static BAR dump for reads, and attempts to identify dynamic relationship(s) between reads & writes. Your card (most likely) will not be able to load the target driver using only the generated logic, its intention is to give you a starting point.
 
 ### Constraints
 - Only supports a single BAR
+    - Could probably make a [dual BAR controller](https://github.com/dzul221/Dual-Bar-Controller/blob/main/pcileech_tlps128_bar_controller.sv) work easily though
 - No MAC randomization support (if your donor card functions as a NIC)
 - Identified relationships between memory addresses could be invalid
 
