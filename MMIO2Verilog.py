@@ -3,10 +3,10 @@ from collections import defaultdict
 import struct
 
 def process_combined_sources(memory_dump_path, mmio_trace_path):
-    if not os.path.isfile():
+    if not os.path.isfile(memory_dump_path):
         print(f"BAR dump file not found: {memory_dump_path}")
         sys.exit(1)
-    if not os.path.isfile():
+    if not os.path.isfile(mmio_trace_path):
         print(f"MMIOTrace file not found: {mmio_trace_path}")
         sys.exit(1)
     
