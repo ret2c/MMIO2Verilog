@@ -24,17 +24,18 @@ def process_combined_sources(memory_dump_path, mmio_trace_path):
     pattern = r"(R|W)\s+4\s+([\d.]+)\s+2\s+(0x[0-9a-fA-F]+)\s+(0x[0-9a-fA-F]+)\s+0x0\s+0"
     
     with open(mmio_trace_path, 'r') as file:
+        ### CHANGE THIS LINE ###
+        bar_address = 0x00000000
+        if bar_address == 0x00000000 or not (0x00000000 <= bar_address <= 0xFFFFFFFF):
+            print("BAR address is invalid, please change it to your actual BAR address (line 28)")
+            sys.exit(1)
         for line in file:
             match = re.match(pattern, line)
             if match:
                 op_type = match.group(1)
                 address = int(match.group(3), 16)
                 data = int(match.group(4), 16)
-                ##########
-                # Replace "0x00000000" with your actual BAR address
-                offset = address - 0x00000000
-                # Replace "0x00000000" with your actual BAR address
-                ##########
+                offset = address - bar_address
                 
                 if op_type == 'R':
                     read_patterns[offset].append(data)
@@ -124,7 +125,7 @@ endmodule""")
     return "\n".join(sv_code)
 
 if __name__ == "__main__":
-    print("MMIO2Verilog Script - Combine RWE & MMIOTrace dump\nChange your BAR on Line 35")
+    print("MMIO2Verilog Script - Combine RWE & MMIOTrace dump")
     memory_dump_file = input("Enter filename of memory dump (.bin): ")
     mmio_trace_file = input("Enter filename of MMIO Trace log: ")
     
