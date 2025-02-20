@@ -5,6 +5,8 @@ Ensure your MMIOTrace is verbose enough, use the device as intended while debugg
 
 ⚠️ This tool generates a static BAR dump for reads, and attempts to identify dynamic relationship(s) between reads & writes. Your card (most likely) will not be able to load the target driver using only the generated logic, its intention is to give you a starting point.
 
+**02/20/25**: If you're looking to build out a ROM BAR Controller, [Simonrak's Repo](https://github.com/Simonrak/verilog-generator) is your best bet.
+
 ### Constraints
 - Only supports a single BAR
     - Could probably make a [dual BAR controller](https://github.com/dzul221/Dual-Bar-Controller/blob/main/pcileech_tlps128_bar_controller.sv) work easily though
