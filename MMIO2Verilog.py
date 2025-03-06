@@ -40,6 +40,7 @@ def process_combined_sources(memory_dump_path, mmio_trace_path):
                 if op_type == 'R':
                     read_patterns[offset].append(data)
                 else:
+                    # Writes usually aren't needed since it's handled by the driver (for the most part)
                     write_patterns[offset].append(data)
 
     sv_code = ["""module pcileech_bar_impl_combined(
